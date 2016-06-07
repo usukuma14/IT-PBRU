@@ -7,10 +7,20 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    //explicit
+    private MyMange myManage;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myManage = new MyMange(this);
+
+
+
     }// Main Method -- statment ;
 
 
