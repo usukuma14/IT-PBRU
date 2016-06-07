@@ -11,6 +11,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private EditText nameEditText, surnameEditText, userEditText, passwordEditText;
     private String nameString, surnameString, userString, passwordString;
+    private static final String urlUpload = "http://swiftcodingthai.com/pbru2/add_user_master.php";
+
 
 
 
@@ -53,11 +55,16 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
 
             //false
+            uploadValueToServer();
 
         }
 
 
     }   //click sign
+
+    private void uploadValueToServer() {
+
+    }
 
     private boolean checkSpace() {
 
