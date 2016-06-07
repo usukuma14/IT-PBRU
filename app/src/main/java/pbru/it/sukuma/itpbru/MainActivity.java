@@ -19,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
         myManage = new MyMange(this);
 
+        //Test Add New User
+        //myManage.addNewUser("123", "name", "sur", "user", "pass");
+
+
+
 
 
     }// Main Method -- statment ;
