@@ -9,10 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     //explicit
     private MyMange myManage;
     private static final String urlJSON = "http://swiftcodingthai.com/pbru2/get_user_master.php";
+    private EditText userEditText, passwordEditText;
+    private String userString, passwordString;
+
+
 
 
 
@@ -27,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Bind Widget
+        userEditText = (EditText) findViewById(R.id.editText5);
+        passwordEditText = (EditText) findViewById(R.id.editText6);
+
 
         myManage = new MyMange(this);
 
@@ -43,7 +56,29 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }// Main Method -- statment ;
+    }   // Main Method -- statment ;
+
+    public void clickSignIn(View view) {
+
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+        //check space
+        if (userString.equals("") || passwordString.equals("")) {
+            MyAlert myAlert = new MyAlert();
+
+            myAlert.myDialog(this, "Have Space", "Pls fill all blank");
+
+
+
+        } else {
+            checkUserAnPassword();
+        }
+
+    }   //clickSignin
+
+    private void checkUserAnPassword() {
+    } // checkuser
 
     private void mySynJSON() {
         ConnectedUserTABLE connectedUserTABLE = new ConnectedUserTABLE(this);
@@ -100,12 +135,36 @@ public class MainActivity extends AppCompatActivity {
             try {
                 progressDialog.dismiss();
                 Log.d("7June", "JSON ==>" + s);
+
+                JSONArray jsonArray = new JSONArray(s);
+
+                String[] idStrings = new String[jsonArray.length()];
+                String[] nameStrings = new String[jsonArray.length()];
+                String[] surnameStrings = new String[jsonArray.length()];
+                String[] userStrings = new String[jsonArray.length()];
+                String[] passwordStrings = new String[jsonArray.length()];
+                for (int i=0; i<jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    idStrings[i] = jsonObject.getString("id");
+                    nameStrings[i] = jsonObject.getString(MyMange.colume_name);
+                    surnameStrings[i] = jsonObject.getString(MyMange.colume_surname);
+                    userStrings[i] = jsonObject.getString(MyMange.colume_user);
+                    passwordStrings[i] = jsonObject.getString(MyMange.colume_password);
+
+                    myManage.addNewUser(idStrings[i], nameStrings[i],
+                            surnameStrings[i], userStrings[i], passwordStrings[i]);
+
+
+
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }   // onPost
-//t
+
         //test
 
 
