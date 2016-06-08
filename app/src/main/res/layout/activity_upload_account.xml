@@ -21,14 +21,16 @@
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:id="@+id/button5"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickCancel" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Upload to Server"
             android:id="@+id/button6"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickUpload" />
     </LinearLayout>
 
     <LinearLayout
@@ -63,9 +65,11 @@
             android:id="@+id/spinner" />
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText7" />
+            android:id="@+id/editText7"
+            android:textColor="#1e61dc"
+            android:inputType="number" />
 
     </LinearLayout>
 </RelativeLayout>
